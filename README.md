@@ -184,10 +184,6 @@ go build -ldflags="-s -w" -o assets/setL ./cmd/setL
 go build -ldflags="-s -w" -o pocketnode-installer.exe ./cmd/installer
 ```
 
-Или просто запустите готовый скрипт:
-```powershell
-.\build.ps1
-```
 
 ---
 
