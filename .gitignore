@@ -1,0 +1,16 @@
+# Binaries
+*.exe
+/setL
+pocketnode-installer
+bin/
+dist/
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Go build cache
+*.test
