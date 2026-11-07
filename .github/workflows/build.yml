@@ -2,8 +2,8 @@ name: Build and Release PocketNode
 
 on:
   push:
-    branches: [ "main" ]
-    tags: [ "v*" ]
+    tags:
+      - "v*"
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
@@ -50,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: pocketnode-binaries
-          path: bin/*
+          path: bin/ # Указываем папку целиком, чтобы сохранить структуру
 
   release:
     name: Publish GitHub Release
@@ -65,18 +65,16 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: pocketnode-binaries
-          path: bin/
+          path: release-assets # Скачиваем в отдельную чистую папку
 
       - name: Package Assets
         run: |
           if [ -f "assets/recovery.tar" ]; then
-            cp assets/recovery.tar bin/
+            cp assets/recovery.tar release-assets/
           fi
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            bin/*
+          files: release-assets/* # Загружаем всё содержимое этой папки в релиз
           generate_release_notes: true
-
